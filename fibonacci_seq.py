@@ -2,9 +2,9 @@ def find_fibonacci_iter(n):
     f0 = 0
     f1 = 1
     if type(n) != int:
-        raise TypeError(f"Input argument should be of type 'int' while it was of type '{type(n)}'")
+        raise TypeError(f"Input argument should be of type 'int' instead it was of type '{type(n)}'")
     if n < 0:
-        raise Exception("Input argument should be greater than or equal to 0")
+        raise ValueError("Input argument should be greater than or equal to 0")
     if n == 0:
         return f0
     if n == 1:
@@ -29,8 +29,21 @@ def find_fibonacci_recur(n):
     fibonacci_cache[n] = value
     return value
 
-# 100: 354224848179261915075
-for i in range(11):
-    print(f"{i}: {find_fibonacci_recur(i)}")
+memoize_dict = {0: 0, 1: 1}
+def find_fib_recur_old(n):
+    # base case
+    if n in memoize_dict:
+        return memoize_dict[n]
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        value = find_fib_recur_old(n-2) + find_fib_recur_old(n-1)
+        memoize_dict[n] = value
+        return value
 
-print(find_fibonacci_recur(3.3))
+# 100: 354224848179261915075
+# for i in range(0, 10002):
+#     print(f"{i}: {find_fib_recur_old(i)}")
+print(find_fib_recur_old(10001))

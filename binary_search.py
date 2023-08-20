@@ -1,4 +1,7 @@
-arr = [1, 2, 3, 4, 5, 6, 7, 8]
+def logn(n):
+    while (n>1):
+        print(n) # cut down n to almost half every successive iteration
+        n = n//2
 
-def binary_search(n):
+arr = [1, 2, 7, 12, 43, 44, 54, 100, 124]
     
